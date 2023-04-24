@@ -1,0 +1,75 @@
+<div class="container-fluid" style="height: auto" >
+  <div class="row">
+    <div class="no-bootstrap col-md-4 border border-secondary w-100"  style="width: 500px;">
+
+        <h3 style="text-align:center">Html Original</h3>
+        <div *ngIf="response != null" contentEditable="false" [innerHTML]="response"></div>
+
+    </div>
+
+    <div class="col-md border col-md-4 border-primary no-bootstrap" style="width: 500px;"  >
+      
+      <h3 style="text-align:center">Html Nuevo</h3>
+      <div *ngIf="response != null" contentEditable="true" [innerHTML]="response" (input)="onDiv2InputChange($event.target.innerHTML)"></div>
+    </div>
+
+    <div class="col-md-4 border border-secondary no-bootstrap" style="text-align:center; height:440px">
+      <div class="form-group">
+        <h3>Modificar</h3>
+        <form [formGroup]="form">
+          <div class="form-group text-center">
+            <label for="environment">Ambiente</label>
+            <div class="d-inline-block">
+              <select class="form-control custom-select" formControlName="environment" style="width: calc(4em + 26px)">
+                <option *ngFor="let env of environments" [value]="env.value">{{env.label}}</option>
+              </select>
+              <span class="select-arrow"></span>
+            </div>
+          </div>
+          
+          <div class="form-group text-center">
+            <label for="country">Pais</label>
+            <div class="d-inline-block">
+            <select class="form-control custom-select" style="width: calc(4em + 11px)" formControlName="country" required>
+              <option value="ar">AR</option>
+              <option value="uy">UY</option>
+              <option value="py">PY</option>
+              <!-- Agrega aquí más opciones según tus necesidades -->
+            </select>
+            <span class="select-arrow"></span>
+          </div>
+          </div>
+          <div class="form-group text-center">
+            <label for="codePlan">Código de Plan</label>
+            <div class="d-inline-block">
+              <input type="text" class="form-control" id="codePlan" formControlName="codePlan" required
+                     style="width: calc(4em + 40px)">
+            </div>
+          </div>
+          <div class="form-group text-center">
+            <label for="type">Tipo de Plan</label>
+            <div class="d-inline-block">
+              <select class="form-control" id="type" formControlName="type" required
+                      [style.width.px]="90" style="text-align:center">
+                <option value="Prepaid">Prepago</option>
+                <option value="Postpaid">Postpago</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group text-center">
+            <label for="procedure">Flujo</label>
+            <div class="d-inline-block">
+              <select class="form-control" id="procedure" [style.width.px]="70"  formControlName="procedure">
+                <option *ngFor="let flow of flows" [value]="flow">{{flow}}</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-block"  (click)="getPlan()">Buscar</button>
+          <button class="btn btn-primary btn-block" (click)="savePlan()">Guardar</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
